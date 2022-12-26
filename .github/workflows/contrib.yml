@@ -20,7 +20,7 @@ jobs:
         run: echo "id=$(date +'%Y-%m-%d-%H%M%S')" >> $GITHUB_OUTPUT
       - name: Generate folder date
         id: folder_date
-        run: echo "folder_date=$(date +'%B%Y')" >> $GITHUB_OUTPUT
+        run: echo "folder_date=$(date +'%B%Y' | tr A-Z a-z)" >> $GITHUB_OUTPUT
       - name: Generate today date
         id: current_date
         run: echo "current_date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
