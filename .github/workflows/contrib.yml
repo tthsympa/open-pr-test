@@ -14,10 +14,10 @@ jobs:
         uses: actions/checkout@v3.0.2
       - name: Generate branch id
         id: branch_id
-        run: echo "::set-output name=id::$(date +'%Y-%m-%d-%H%M%S')"
+        run: echo "name=id::$(date +'%Y-%m-%d-%H%M%S')" >> $GITHUB_OUTPUT
       - name: Get current date
         id: current_date
-        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+        run: echo "name=date::$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
       - name: Create file
         run: |
           mkdir -p ./changelog/billing
@@ -27,7 +27,7 @@ jobs:
         with:
           token: ${{ secrets.PAT }}
           commit-message: Auto Pull Request
-          title: New changelog - ${{ github.event.inputs.reporter }} ${{ steps.current_date.outputs.date }}
+          title: New changelog - ${{ steps.current_date.outputs.date }}
           body: Auto-created Pull Request
-          branch: changelog/${{ github.event.inputs.status }}/${{ steps.branch_id.outputs.id }}
+          branch: changelog/${{ steps.branch_id.outputs.id }}
           delete-branch: true
