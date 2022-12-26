@@ -8,9 +8,13 @@ on:
       small_title:
         description: 'Small title'
         required: true
+      security_key:
+        description: 'Security key'
+        required: true
 
 jobs:
   create-pull-request:
+    if: ${{ github.event.inputs.security_key }} == ${{ secrets.SECURITY_KEY }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -32,11 +36,11 @@ jobs:
         uses: peter-evans/create-pull-request@v4.1.1
         with:
           token: ${{ secrets.PAT }}
-          commit-message: "feat(changelog): add new entry"
-          title: "feat(changelog): ${{ github.event.inputs.small_title }} ${{ steps.current_date.outputs.current_date }}"
+          commit-message: 'feat(changelog): add new entry'
+          title: 'feat(changelog): ${{ github.event.inputs.small_title }} ${{ steps.current_date.outputs.current_date }}'
           body: |
             This Pull Request have been automatically created by a Scaler.
-            
+
             Please review it carefully before merging it.
           branch: docs/changelog/${{ steps.branch_id.outputs.id }}
           delete-branch: true
