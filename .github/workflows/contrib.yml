@@ -33,7 +33,7 @@ jobs:
         with:
           token: ${{ secrets.PAT }}
           commit-message: "feat(changelog): add new entry"
-          title: "feat(changelog): ${{ github.event.inputs.small_title }} ${{ steps.current_date.outputs.date }}"
+          title: "feat(changelog): ${{ github.event.inputs.small_title }} ${{ steps.current_date.outputs.current_date }}"
           body: |
             This Pull Request have been automatically created by a Scaler.
             
