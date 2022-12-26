@@ -27,8 +27,7 @@ jobs:
         with:
           token: ${{ secrets.PAT }}
           commit-message: Auto Pull Request
-          title: New changelog - ${{ github.event.inputs.reporter }} ${{ 
-steps.current_date.outputs.date }}
+          title: New changelog - ${{ github.event.inputs.reporter }} ${{ steps.current_date.outputs.date }}
           body: Auto-created Pull Request
           branch: changelog/${{ github.event.inputs.status }}/${{ steps.branch_id.outputs.id }}
           delete-branch: true
