@@ -2,14 +2,8 @@ name: Changelog contribution
 on:
   workflow_dispatch:
     inputs:
-      reporter:
-        description: 'Reporter (Name and Surname)'
-        required: true
-      status:
-        description: 'Status of the new logs'
-        required: true
-      description:
-        description: 'Description of the new logs'
+      log:
+        description: 'Contributed log'
         required: true
 
 jobs:
@@ -26,25 +20,12 @@ jobs:
         run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
       - name: Create file
         run: |
-          mkdir -p ./changelog/billing/$(date +'%B%Y')
-          cat > ./changelog/billing/$(date +'%B%Y')/${{ steps.current_date.outputs.date }}-${{ 
-github.event.inputs.status }}.mdx << EOF
-          ---
-          title: Lorem ipsum dolor sit amet
-          status: ${{ github.event.inputs.status }}
-          author: 
-              fullname: ${{ github.event.inputs.reporter }}
-              url: 'http://www.scaleway.com'
-          date: ${{ steps.current_date.outputs.date }}
-          category: storage
-          product: object-storage
-          ---
-          ${{ github.event.inputs.description }}
-          EOF
+          mkdir -p ./changelog/billing
+          echo "test" > ./changelog/billing/test.txt
       - name: Create pull request towards the main branch
         uses: peter-evans/create-pull-request@v4.1.1
         with:
-          token: ${{ secrets.GH_TOKEN }}
+          token: ${{ secrets.PAT }}
           commit-message: Auto Pull Request
           title: New changelog - ${{ github.event.inputs.reporter }} ${{ 
 steps.current_date.outputs.date }}
