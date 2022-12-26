@@ -8,13 +8,9 @@ on:
       small_title:
         description: 'Small title'
         required: true
-      security_key:
-        description: 'Security key'
-        required: true
 
 jobs:
   create-pull-request:
-    if: ${{ github.event.inputs.security_key }} == ${{ secrets.SECURITY_KEY }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
