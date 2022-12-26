@@ -40,3 +40,5 @@ jobs:
             Please review it carefully before merging it.
           branch: docs/changelog/${{ steps.branch_id.outputs.id }}
           delete-branch: true
+          reviewers: bene2k1, nedaehm, ldecarvalho-doc, RoRoJ
+          labels: changelog
